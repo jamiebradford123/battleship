@@ -15,8 +15,29 @@ being 4
 Best of Luck!
 """
 
-PLAYER_BOARD = [[' '] * 5 for x in range(5)]
-COMPUTER_BOARD = [[' '] * 5 for x in range(5)]
+class Board:
+    """
+    The board class that will be used for the players and computers board. 
+    Sets the size, number of ships, board type (players or comuters). 
+    Will add ships and guesses and print the board for each turn.
+    """
+    def __init__(self, size, num_ships):
+        self.size = size
+        self.board = [[" " for x in range(size)] for y in range(size)]
+        self.num_ships = num_ships
+        self.guesses = []
+        self.ships = []
+    
+
+def board():
+    print("Enter the number of rows you would like your game to have:")
+    row = int(input("Please enter a number (max:10): "))
+    print("Enter the number of columns you would like your game to have:")
+    col = int(input("Please enter a number (max:10): "))
+    for x in range(row):
+        print("x "*col)
+
+
 
 # def random_point(size):
 #     """
@@ -34,8 +55,8 @@ def new_game():
     player_name = input("Please enter your name: \n")
     print(f"\n {player_name}'s Score: 0 ")
     print(" Computer's Score: 0 \n")
-    print(PLAYER_BOARD)
-    print(COMPUTER_BOARD)
+    board()
+
 
 
 new_game()
