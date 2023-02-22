@@ -1,4 +1,4 @@
-from random import randint
+# from random import randint
 
 rules = """
 - The aim of the game is to find all of your opponents ships before they find
@@ -13,9 +13,15 @@ being 4
 - Each player takes it in turns
 
 Best of Luck!
-
 """
 
+PLAYER_BOARD = [[' '] * 5 for x in range(5)]
+COMPUTER_BOARD = [[' '] * 5 for x in range(5)]
+
+# def random_point(size):
+#     """
+#     Returns random integer between 0 and size
+#     """
 
 def new_game():
     """
@@ -25,6 +31,11 @@ def new_game():
     print("Welcome to Battleships!\n")
     print("Here are the rules:")
     print(rules)
+    player_name = input("Please enter your name: \n")
+    print(f"\n {player_name}'s Score: 0 ")
+    print(" Computer's Score: 0 \n")
+    print(PLAYER_BOARD)
+    print(COMPUTER_BOARD)
 
 
 new_game()
