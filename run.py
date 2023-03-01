@@ -1,65 +1,116 @@
-from random import randint
-import time
+import random
 
-
-rules = """
-- The aim of the game is to find all of your opponents ships before they find
-yours.
-- This game is YOU vs COMPUTER
-- Both players have 4 ships to find on a 5x5 grid
-- Enter a row number between 0-4 , with 0 being the far left, and right being 4
-- Enter a column number between 0-4 , with 0 being the far left, and right
-being 4
-- If a ship is hit, an '*' will appear on the board
-- If a guess is missed, an 'X' will appear on the board
-- Each player takes it in turns
-
-Best of Luck!
-"""
 
 class Board:
     """
-    The board class that will be used for the players and computers board. 
-    Sets the size, number of ships, board type (players or comuters). 
-    Will add ships and guesses and print the board for each turn.
+    Creates and prints the board to the user
     """
-    def __init__(self, size, num_ships):
-        self.size = size
-        self.board = [[" " for x in range(size)] for y in range(size)]
-        self.num_ships = num_ships
-        self.guesses = []
-        self.ships = []
-    
+    def __init__(self, board):
+        self.board = board
 
-def board():
-    print("1 2 3 4 5")
-    for x in range(size):
-        print("x "*col)
+    def get_letters_to_numbers():
+        """
+        Translates the letters users enter to numbers, so the selected column
+        letter can be selected
+        """
+        letters_to_numbers = {
+            "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5
+            }
+        return letters_to_numbers
+
+    def print_board(self):
+        """
+        Prints the board to the user
+        """
+        print("  A B C D E F")
+        row_number = 1
+        for row in self.board:
+            print("%d|%s|" % (row_number, "|".join(row)))
+            row_number += 1
 
 
-
-# def random_point(size):
-#     """
-#     Returns random integer between 0 and size
-#     """
-
-def new_game():
+class Battleship:
     """
-    Starts a new game. Sets the board sixe and number of ships. Resets the
-    scores and randomizes the board
+    Creates the ships randomly, ask for the user imput
+    and count how many ships have been hit so the game
+    knows when to end
     """
-    size = 5
-    print("Welcome to Battleships!\n")
-    time.sleep(1)
-    print("Here are the rules:")
-    time.sleep(1)
-    print(rules)
-    time.sleep(1)
-    player_name = input("Please enter your name: \n")
-    print(f"\n {player_name}'s Score: 0 ")
-    print(" Computer's Score: 0 \n")
-    board()
+    def __init__(self, board):
+        self.board = board
 
+    def create_ships(self):
+        """
+        Creates the ships randomly on the board
+        """
+        for i in range(5):
+            self.x_row, self.y_column = random.randint(0, 5), random.randint(0, 5)
+            # Checks if the position has already been selected, if so run again
+            while self.board[self.x_row][self.y_column] == "X":
+                self.x_row, self.y_column = random.randint(0, 5), random.randint(0, 5)
+            # Places the ship on the board
+            self.board[self.x_row][self.y_column] = "X"
+        return self.board
 
+    def get_user_input(self):
+        """
+        Collects the users input, and validates that their option is valid
+        """
+        try:
+            x_row = input("Enter the row of the ship: ")
+            while x_row not in '123456':
+                print('Choice seleced invalid, choose another row')
+                x_row = input("Enter the row of the ship: ")
+            
+            y_column = input("Enter the column letter of the ship: ").upper()
+            while y_column not in "ABCDEF":
+                print('Choice seleced invalid, choose another column')
+                y_column = input("Enter column letter of the ship: ").upper()
+            return int(x_row) - 1, Board.get_letters_to_numbers()[y_column]
+        # If user enters nothing
+        except ValueError and KeyError:
+            print("Not a valid input")
+            return self.get_user_input()
 
-new_game()
+    def count_hit_ships(self):
+        """
+        Counts the number of hit ships 
+        """
+        hit_ships = 0
+        for row in self.board:
+            for column in row:
+                if column == "X":
+                    hit_ships += 1
+        return hit_ships
+        
+def RunGame():
+    """
+    Runs the game
+    """
+    computer_board = Board([[" "] * 6 for i in range(6)])
+    user_guess_board = Board([[" "] * 6 for i in range(6)])
+    Battleship.create_ships(computer_board)
+    turns = 10
+    while turns > 0:
+        Board.print_board(user_guess_board)
+        user_x_row, user_y_column = Battleship.get_user_input(object)
+        while user_guess_board.board[user_x_row][user_y_column] == "-" or user_guess_board.board[user_x_row][user_y_column] == "X":
+            print("You have already chose this space")
+            user_x_row, user_y_column = Battleship.get_user_input(object)
+        if computer_board.board[user_x_row][user_y_column] == "X":
+            print("You sunk a battleship!")
+            user_guess_board.board[user_x_row][user_y_column] = "X"
+        else:
+            print("You missed!")
+            user_guess_board.board[user_x_row][user_y_column] = "-"
+        if Battleship.count_hit_ships(user_guess_board) == 5:
+            print("You sunk all the Battleships! You win")
+        else:
+            turns -= 1
+            print(f"You have {turns} turns remaining")
+            if turns == 0:
+                print("You have run out of missiles. Game over")
+                Board.print_board(user_guess_board)
+                break
+
+if __name__ == '__main__':
+  RunGame()
