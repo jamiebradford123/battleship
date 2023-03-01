@@ -1,5 +1,25 @@
 import random
 
+rules = """
+- The aim of the game is to find all of your opponents ships before you
+run out of missiles
+- This game is YOU vs COMPUTER
+- Both players have 4 ships to find on a 5x5 grid
+- Enter a row number between 0-4 , with 0 being the far left, and right being 4
+- Enter a column number between 0-4 , with 0 being the far left, and right
+being 4
+- If a ship is hit, an '*' will appear on the board
+- If a guess is missed, an 'X' will appear on the board
+- Each player takes it in turns
+
+Best of Luck!
+"""
+
+def intro():
+    print("Welcome to Battleships!\n")
+    print("Here are the rules:")
+    print(rules)
+    player_name = input("Please enter your name: \n")
 
 class Board:
     """
@@ -14,7 +34,7 @@ class Board:
         letter can be selected
         """
         letters_to_numbers = {
-            "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5
+            "A": 0, "B": 1, "C": 2, "D": 3, "E": 4
             }
         return letters_to_numbers
 
@@ -22,7 +42,7 @@ class Board:
         """
         Prints the board to the user
         """
-        print("  A B C D E F")
+        print("  A B C D E")
         row_number = 1
         for row in self.board:
             print("%d|%s|" % (row_number, "|".join(row)))
@@ -42,11 +62,11 @@ class Battleship:
         """
         Creates the ships randomly on the board
         """
-        for i in range(5):
-            self.x_row, self.y_column = random.randint(0, 5), random.randint(0, 5)
+        for i in range(4):
+            self.x_row, self.y_column = random.randint(0, 4), random.randint(0, 4)
             # Checks if the position has already been selected, if so run again
             while self.board[self.x_row][self.y_column] == "X":
-                self.x_row, self.y_column = random.randint(0, 5), random.randint(0, 5)
+                self.x_row, self.y_column = random.randint(0, 4), random.randint(0, 4)
             # Places the ship on the board
             self.board[self.x_row][self.y_column] = "X"
         return self.board
@@ -57,12 +77,12 @@ class Battleship:
         """
         try:
             x_row = input("Enter the row of the ship: ")
-            while x_row not in '123456':
+            while x_row not in '12345':
                 print('Choice seleced invalid, choose another row')
                 x_row = input("Enter the row of the ship: ")
             
             y_column = input("Enter the column letter of the ship: ").upper()
-            while y_column not in "ABCDEF":
+            while y_column not in "ABCDE":
                 print('Choice seleced invalid, choose another column')
                 y_column = input("Enter column letter of the ship: ").upper()
             return int(x_row) - 1, Board.get_letters_to_numbers()[y_column]
@@ -86,10 +106,10 @@ def RunGame():
     """
     Runs the game
     """
-    computer_board = Board([[" "] * 6 for i in range(6)])
-    user_guess_board = Board([[" "] * 6 for i in range(6)])
+    computer_board = Board([[" "] * 5 for i in range(5)])
+    user_guess_board = Board([[" "] * 5 for i in range(5)])
     Battleship.create_ships(computer_board)
-    turns = 10
+    turns = 12
     while turns > 0:
         Board.print_board(user_guess_board)
         user_x_row, user_y_column = Battleship.get_user_input(object)
@@ -113,4 +133,5 @@ def RunGame():
                 break
 
 if __name__ == '__main__':
-  RunGame()
+    intro()
+    RunGame()
