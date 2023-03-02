@@ -3,23 +3,35 @@ import random
 rules = """
 - The aim of the game is to find all of your opponents ships before you
 run out of missiles
-- This game is YOU vs COMPUTER
-- Both players have 4 ships to find on a 5x5 grid
-- Enter a row number between 0-4 , with 0 being the far left, and right being 4
-- Enter a column number between 0-4 , with 0 being the far left, and right
+- You have 4 ships to find with 12 missiles on a 5x5 grid
+- Enter a row number between 1-5 , with 1 being the top and 5 being the bottom
+- Enter a column between A-E , with A being the far left and E being the far right
 being 4
-- If a ship is hit, an '*' will appear on the board
-- If a guess is missed, an 'X' will appear on the board
-- Each player takes it in turns
+- If a ship is hit, an 'X' will appear on the board
+- If a guess is missed, an '-' will appear on the board
+- If you run out of missiles before all the ships are destroyed, you loose
+- If you destroy all the ships, you win!
 
 Best of Luck!
 """
 
+
 def intro():
     print("Welcome to Battleships!\n")
-    print("Here are the rules:")
-    print(rules)
-    player_name = input("Please enter your name: \n")
+    name = input("What is your name?\n")
+    if name.isalpha():
+        print(f"\nHello {name}!")
+    else:
+        print("Please use only letters, try again")
+    show_rules = input("\nWould you like to see the rules? ").upper()
+    if show_rules == "N":
+        print("Let the game begin!")
+    elif show_rules == "Y":
+        print(rules)
+    else:
+        print("invalid input, Try again")
+        return intro()
+
 
 class Board:
     """
