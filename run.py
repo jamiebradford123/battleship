@@ -1,4 +1,5 @@
 import random
+import time
 
 rules = """
 - The aim of the game is to find all of your opponents ships before you
@@ -23,9 +24,10 @@ def intro():
         print(f"\nHello {name}!")
     else:
         print("Please use only letters, try again")
+        return intro()
     show_rules = input("\nWould you like to see the rules? ").upper()
     if show_rules == "N":
-        print("Let the game begin!")
+        print("Good luck!\n")
     elif show_rules == "Y":
         print(rules)
     else:
@@ -88,15 +90,18 @@ class Battleship:
         Collects the users input, and validates that their option is valid
         """
         try:
-            x_row = input("Enter the row of the ship: ")
+            x_row = input("Enter the row of the ship (1-5): ")
             while x_row not in '12345':
                 print('Choice seleced invalid, choose another row')
                 x_row = input("Enter the row of the ship: ")
             
-            y_column = input("Enter the column letter of the ship: ").upper()
+            y_column = input("Enter the column letter of the ship (A-E): ").upper()
             while y_column not in "ABCDE":
                 print('Choice seleced invalid, choose another column')
                 y_column = input("Enter column letter of the ship: ").upper()
+            time.sleep(3)
+            print("Firing now...\n")
+            time.sleep(3)
             return int(x_row) - 1, Board.get_letters_to_numbers()[y_column]
         # If user enters nothing
         except ValueError and KeyError:
@@ -122,6 +127,12 @@ def RunGame():
     user_guess_board = Board([[" "] * 5 for i in range(5)])
     Battleship.create_ships(computer_board)
     turns = 12
+    game_start = input("Press Y to start:  ").upper()
+    if game_start == "Y":
+        print("Fire away!\n")
+    else:
+        print("Invalid input")
+        return RunGame()
     while turns > 0:
         Board.print_board(user_guess_board)
         user_x_row, user_y_column = Battleship.get_user_input(object)
@@ -139,6 +150,7 @@ def RunGame():
         else:
             turns -= 1
             print(f"You have {turns} turns remaining")
+            print(f"You have hit {Battleship.count_hit_ships(user_guess_board)} out of 4 Ships")
             if turns == 0:
                 print("You have run out of missiles. Game over")
                 Board.print_board(user_guess_board)
