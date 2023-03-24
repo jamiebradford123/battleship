@@ -19,19 +19,13 @@ Best of Luck!
 
 def intro():
     print("Welcome to Battleships!\n")
-    name = input("What is your name?\n")
-    if name.isalpha():
-        print(f"\nHello {name}!")
-    else:
-        print("Please use only letters, try again")
-        return intro()
-    show_rules = input("\nWould you like to see the rules? ").upper()
+    show_rules = input("\nWould you like to see the rules? Y/N ").upper()
     if show_rules == "N":
         print("Good luck!\n")
     elif show_rules == "Y":
         print(rules)
     else:
-        print("invalid input, Try again")
+        print("\nPlease enter Y or N! \n")
         return intro()
 
 
@@ -89,24 +83,44 @@ class Battleship:
         """
         Collects the users input, and validates that their option is valid
         """
-        try:
+        while True:
             x_row = input("Enter the row of the ship (1-5): ")
-            while x_row not in '12345':
-                print('Choice seleced invalid, choose another row')
-                x_row = input("Enter the row of the ship: ")
+            try:
+                if int(x_row) in [1, 2, 3, 4, 5]:
+                    print('condition A met')
+                    break
+                else:
+                    print("not in specified range")
+                    continue
+            except:
+                print("not a number")
+                continue
+
+        while True:
+            y_column = input("Enter the col of the ship (A-E): ").upper()
+            try:
+                if y_column in ['A', 'B', 'C', 'D', 'E']:
+                    print('condition B met')
+                    break
+                else:
+                    continue
+            except:
+                continue
+
+        # x_row = input("Enter the row of the ship (1-5): ")
+        # while x_row not in '12345':
+        #     print('Choice seleced invalid, choose another row')
+        #     x_row = input("Enter the row of the ship: ")
             
-            y_column = input("Enter the column letter of the ship (A-E): ").upper()
-            while y_column not in "ABCDE":
-                print('Choice seleced invalid, choose another column')
-                y_column = input("Enter column letter of the ship: ").upper()
-            time.sleep(3)
-            print("Firing now...\n")
-            time.sleep(3)
-            return int(x_row) - 1, Board.get_letters_to_numbers()[y_column]
-        # If user enters nothing
-        except ValueError and KeyError:
-            print("Not a valid input")
-            return self.get_user_input()
+        # y_column = input("Enter the column letter of the ship (A-E): ").upper()
+        # while y_column not in "ABCDE":
+        #     print('Choice seleced invalid, choose another column')
+        #     y_column = input("Enter column letter of the ship: ").upper()
+        time.sleep(0.5)
+        print("Firing now...\n")
+        time.sleep(1)
+        return int(x_row) - 1, Board.get_letters_to_numbers()[y_column]
+
 
     def count_hit_ships(self):
         """
