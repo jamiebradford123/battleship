@@ -87,24 +87,24 @@ class Battleship:
             x_row = input("Enter the row of the ship (1-5): ")
             try:
                 if int(x_row) in [1, 2, 3, 4, 5]:
-                    print('condition A met')
                     break
                 else:
-                    print("not in specified range")
+                    print("Enter a number 1-5")
                     continue
             except:
-                print("not a number")
+                print("Enter a number 1-5")
                 continue
 
         while True:
             y_column = input("Enter the col of the ship (A-E): ").upper()
             try:
                 if y_column in ['A', 'B', 'C', 'D', 'E']:
-                    print('condition B met')
                     break
                 else:
+                    print("Enter a letter A-E")
                     continue
             except:
+                print("Enter a letter A-E")
                 continue
 
         # x_row = input("Enter the row of the ship (1-5): ")
