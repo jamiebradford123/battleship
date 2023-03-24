@@ -19,7 +19,7 @@ Best of Luck!
 
 def intro():
     print("Welcome to Battleships!\n")
-    show_rules = input("\nWould you like to see the rules? Y/N ").upper()
+    show_rules = input("\nWould you like to see the rules? Y/N \n").upper()
     if show_rules == "N":
         print("Good luck!\n")
     elif show_rules == "Y":
@@ -84,7 +84,7 @@ class Battleship:
         Collects the users input, and validates that their option is valid
         """
         while True:
-            x_row = input("Enter the row of the ship (1-5): ")
+            x_row = input("Enter the row of the ship (1-5): \n")
             try:
                 if int(x_row) in [1, 2, 3, 4, 5]:
                     break
@@ -96,7 +96,7 @@ class Battleship:
                 continue
 
         while True:
-            y_column = input("Enter the col of the ship (A-E): ").upper()
+            y_column = input("Enter the col of the ship (A-E): \n").upper()
             try:
                 if y_column in ['A', 'B', 'C', 'D', 'E']:
                     break
@@ -106,16 +106,6 @@ class Battleship:
             except:
                 print("Enter a letter A-E")
                 continue
-
-        # x_row = input("Enter the row of the ship (1-5): ")
-        # while x_row not in '12345':
-        #     print('Choice seleced invalid, choose another row')
-        #     x_row = input("Enter the row of the ship: ")
-            
-        # y_column = input("Enter the column letter of the ship (A-E): ").upper()
-        # while y_column not in "ABCDE":
-        #     print('Choice seleced invalid, choose another column')
-        #     y_column = input("Enter column letter of the ship: ").upper()
         time.sleep(0.5)
         print("Firing now...\n")
         time.sleep(1)
