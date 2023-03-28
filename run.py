@@ -4,7 +4,7 @@ import time
 rules = """
 - The aim of the game is to find all of your opponents ships before you
 run out of missiles
-- You have 4 ships to find with 12 missiles on a 5x5 grid
+- You have 4 ships to find with 15 missiles on a 5x5 grid
 - Enter a row number between 1-5 , with 1 being the top and 5 being the bottom
 - Enter a column between A-E , A being far left and E being the far right
 being 4
@@ -134,7 +134,7 @@ def run_game():
     computer_board = Board([[" "] * 5 for i in range(5)])
     user_guess_board = Board([[" "] * 5 for i in range(5)])
     Battleship.create_ships(computer_board)
-    turns = 12
+    turns = 15
     game_start = input("Press Y to start:  ").upper()
     if game_start == "Y":
         print("Fire away!\n")
