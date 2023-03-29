@@ -156,13 +156,13 @@ def run_game():
         if Battleship.count_hit_ships(user_guess_board) == 5:
             print("You sunk all the Battleships! You win")
         else:
-            turns = 15
+            turns -= 1
             print(f"You have {turns} turns remaining")
             print(f"You have hit {Battleship.count_hit_ships(user_guess_board)} out of 4 Ships")
             if turns == 0:
                 print("You have run out of missiles. \nGame over!\n")
                 Board.print_board(user_guess_board)
-                print("\nHere is where the missing ships were!\n ")
+                print("\nHere is where the missing ships ")
                 Board.print_board(computer_board)
                 break
     play_again = input("\nPress Y to play again:  ").upper()
