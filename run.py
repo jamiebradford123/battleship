@@ -156,7 +156,7 @@ def run_game():
         if Battleship.count_hit_ships(user_guess_board) == 5:
             print("You sunk all the Battleships! You win")
         else:
-            turns -= 15
+            turns = 15
             print(f"You have {turns} turns remaining")
             print(f"You have hit {Battleship.count_hit_ships(user_guess_board)} out of 4 Ships")
             if turns == 0:
