@@ -64,7 +64,7 @@ class Board:
 class Battleship:
     """
     Creates the ships randomly, ask for the user imput
-    and count how many ships have been hit so the game
+    and counts how many ships have been hit so the game
     knows when to end
     """
     def __init__(self, board):
@@ -162,7 +162,7 @@ def run_game():
             if turns == 0:
                 print("You have run out of missiles. \nGame over!\n")
                 Board.print_board(user_guess_board)
-                print("\nHere is where the missing ships ")
+                print("\nHere is where the ships were located ")
                 Board.print_board(computer_board)
                 break
     play_again = input("\nPress Y to play again:  ").upper()
