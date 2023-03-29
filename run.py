@@ -134,7 +134,7 @@ def run_game():
     computer_board = Board([[" "] * 5 for i in range(5)])
     user_guess_board = Board([[" "] * 5 for i in range(5)])
     Battleship.create_ships(computer_board)
-    turns = 15
+    turns = 1
     game_start = input("Press Y to start:  ").upper()
     if game_start == "Y":
         print("Fire away!\n")
@@ -156,13 +156,20 @@ def run_game():
         if Battleship.count_hit_ships(user_guess_board) == 5:
             print("You sunk all the Battleships! You win")
         else:
-            turns -= 1
+            turns -= 15
             print(f"You have {turns} turns remaining")
             print(f"You have hit {Battleship.count_hit_ships(user_guess_board)} out of 4 Ships")
             if turns == 0:
-                print("You have run out of missiles. Game over")
+                print("You have run out of missiles. \nGame over!\n")
                 Board.print_board(user_guess_board)
+                print("\nHere is where the missing ships were!\n ")
+                Board.print_board(computer_board)
                 break
+    play_again = input("\nPress Y to play again:  ").upper()
+    if play_again == "Y":
+        run_game()
+    else:
+        print("Thanks for playing!")
 
 
 if __name__ == '__main__':
