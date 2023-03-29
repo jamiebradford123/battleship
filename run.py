@@ -134,7 +134,7 @@ def run_game():
     computer_board = Board([[" "] * 5 for i in range(5)])
     user_guess_board = Board([[" "] * 5 for i in range(5)])
     Battleship.create_ships(computer_board)
-    turns = 1
+    turns = 15
     game_start = input("Press Y to start:  ").upper()
     if game_start == "Y":
         print("Fire away!\n")
