@@ -42,12 +42,15 @@ being 4
 
 ### Future Features
 - Play against computer
+    - Head to head game where the player and computer take it in turns to hit eachothers ships. Whoever destroys the others ships wins
 - Local co-op
-- Choose board size
-- Choose number of ships
+    - 2 players on the same device can go head to head to destroy eachothers ships
+- Choose board size/ Choose number of ships
+    - Add customisation for player by allowing them to change aspects of the game including the number of missiles
 - Have different size ships
-- Choose location of ships
+    - Ships can be larger than 1x1
 - Difficulty settings
+    - Reduce number of missiles, increase the number of ships or increase the board size to make the game harder. Easier difficulties will do the opposite
 
 ## Data Model
 - The Board class and the Battleship class was used as the model. The game creates 2 instances of the board to hold the Players board and the Guess board
@@ -71,7 +74,9 @@ being 4
 - No remaining bugs
 
 #### Validator testing
-- PEP8 
+- PEP8 using https://pep8ci.herokuapp.com/
+![PEP8](/images/pep8.png)
+
 
 ## Deployment 
 
@@ -85,6 +90,6 @@ This project was deployed using the Code Institute's mock terminal for Heroku
 
 ## Credits
 - CI tutorials
-- CI fpr the deployment terminal 
-- YOUTUBE TUTORIAL
-- CI tutorials
+- CI for the deployment terminal 
+- This youtube tutoral for providing a good foundation to work with - https://www.youtube.com/watch?v=alJH_c9t4zw
+- My mentor Precious for providing feedback and ideas to improve my project

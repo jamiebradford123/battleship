@@ -76,11 +76,11 @@ class Battleship:
         """
         for i in range(4):
             self.x_row, self.y_column = random.randint(0, 4), \
-            random.randint(0, 4)
+                random.randint(0, 4)
             # Checks if the position has already been selected, if so run again
             while self.board[self.x_row][self.y_column] == "X":
                 self.x_row, self.y_column = random.randint(0, 4), \
-                random.randint(0, 4)
+                    random.randint(0, 4)
             # Places the ship on the board
             self.board[self.x_row][self.y_column] = "X"
         return self.board
@@ -147,7 +147,7 @@ def run_game():
         Board.print_board(user_guess_board)
         user_x_row, user_y_column = Battleship.get_user_input(object)
         while user_guess_board.board[user_x_row][user_y_column] == "-" \
-        or user_guess_board.board[user_x_row][user_y_column] == "X":
+                or user_guess_board.board[user_x_row][user_y_column] == "X":
             print("You have already chose this space")
             user_x_row, user_y_column = Battleship.get_user_input(object)
         if computer_board.board[user_x_row][user_y_column] == "X":
@@ -161,8 +161,8 @@ def run_game():
         else:
             turns -= 1
             print(f"You have {turns} turns remaining")
-            print(f"You have hit {Battleship.count_hit_ships(user_guess_board)}\
-             out of 4 Ships")
+            print(f"You have hit \
+            {Battleship.count_hit_ships(user_guess_board)}out of 4 Ships")
             if turns == 0:
                 print("You have run out of missiles. \nGame over!\n")
                 Board.print_board(user_guess_board)
