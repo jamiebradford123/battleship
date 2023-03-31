@@ -97,7 +97,7 @@ class Battleship:
                 else:
                     print("Invalid! You must enter a number 1-5")
                     continue
-            except Exception as e:
+            except Exception:
                 print("Invalid! You must enter a number 1-5")
                 continue
 
@@ -109,7 +109,7 @@ class Battleship:
                 else:
                     print("Invalid! You must enter a letter A-E")
                     continue
-            except Exception as e:
+            except Exception:
                 print("Invalid! You must enter a letter A-E")
                 continue
         time.sleep(0.5)
